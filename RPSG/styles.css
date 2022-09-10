@@ -1,0 +1,151 @@
+:root {
+  --clr-1: #0a0744;
+  --clr-2: #403275;
+  --clr-3: #aca4bb;
+  --clr-4: #e9e9e9;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1,
+p{
+  color: var(--clr-1);
+}
+
+body {
+  width: 100%;
+  height: 90vh;
+}
+
+/* layout */
+.rps-game {
+  max-width: 30rem;
+  height: auto;
+  margin: 1rem auto;
+  border: 2px solid var(--clr-1);
+  background-color: var(--clr-4);
+}
+
+/* header */
+.header {
+  background-color: var(--clr-3);
+  color:var(--clr-1);
+  width: 100%;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  column-gap: 5rem;
+}
+
+.logo {
+  font-size: 2rem;
+  margin-left: 2rem;
+}
+
+/* main */
+.container{
+  margin: 1rem 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.score-board {
+  border: 2px solid var(--clr-1);
+  position: relative;
+  width: 10rem;
+  height: 4rem;
+  display:grid;
+  place-items: center;
+}
+
+.score-board span{
+  font-size: 2rem;
+}
+
+.player-img {
+  background-color: var(--clr-4);
+  font-size: 2rem;
+  position: absolute;
+  top:50%;
+}
+
+.left{
+  left: 0;
+  translate: -50% -50%;
+}
+
+.right{
+  right: 0;
+  translate: 50% -50%;
+}
+
+.info {
+  width: 100%;
+  height: 2rem;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.result {
+  font-size: 2rem;
+}
+
+.choices {
+  width: 20rem;
+  height: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.choice {
+  font-size: 5rem;
+}
+
+.action {
+  width: 20rem;
+  height: 4rem;
+  text-align: center;
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+.action-msg {
+  font-size: 2rem;
+  scale: 0;
+  transition: scale 250ms ease-in 250ms;
+}
+
+.show-msg {
+  scale: 1;
+}
+
+.start {
+  width: 10rem;
+  height: 100%;
+  font-size: 2rem;
+  color: white;
+  background-color: var(--clr-2);
+  position: absolute;
+  visibility: visible;
+  transition: 250ms ease-in;
+  transition-property: visibility, opacity;
+  cursor: pointer;
+}
+
+.start:hover {
+  opacity: 0.6;
+}
+
+.hide-start {
+  visibility: hidden;
+}

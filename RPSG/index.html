@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/b5b6de7721.js" crossorigin="anonymous"></script>
+    <title>Rock Paper Scissor Game</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <section class="rps-game">
+      <header class="header">
+        <div class="logo"><i class="fa-solid fa-puzzle-piece"></i></div>
+        <h1>Rock Paper Scissors</h1>
+      </header>
+      <main class="container">
+  
+        <div class="score-board">
+          <div id="player" class="player-img left"><i class="fa-solid fa-headset"></i></div>
+          <div id="computer" class="player-img right"><i class="fa-solid fa-robot"></i></div>
+          <div class="score">
+            <span id="player-score">0</span>
+            <span>:</span>
+            <span id="computer-score">0</span>
+          </div>
+        </div>
+  
+        <div class="info">
+          <p class="result">Welcome to the RPC game</p>
+        </div>
+  
+        <div class="choices">
+          <div class="choice" id="r"><i class="fa-regular fa-hand-back-fist"></i></div>
+          <div class="choice" id="p"><i class="fa-regular fa-hand"></i></div>
+          <div class="choice" id="c"><i class="fa-regular fa-hand-scissors"></i></div>
+        </div>
+  
+        <div class="action">
+          <p id="action-msg" class="action-msg">Choose your action</p>
+          <button class="start">Start</button>
+        </div>
+
+      </main>
+    </section>
+    <!-- javascript -->
+    <script src="app.js"></script>
+  </body>
+</html>
