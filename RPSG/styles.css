@@ -1,3 +1,18 @@
+/* font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap');
+
+/* 
+  Table Content
+    1. header
+    2. main
+    3. score board
+    4. choices
+    5. start and msg
+    6. strategy
+    7. animation
+*/
+
+
 :root {
   --clr-1: #0a0744;
   --clr-2: #403275;
@@ -16,6 +31,7 @@
 h1,
 p{
   color: var(--clr-1);
+  font-family: 'Roboto Mono', monospace;
 }
 
 body {
@@ -25,7 +41,7 @@ body {
 
 /* layout */
 .rps-game {
-  max-width: 30rem;
+  max-width: 35rem;
   height: auto;
   margin: 1rem auto;
   border: 2px solid var(--clr-1);
@@ -40,7 +56,7 @@ body {
   height: 10vh;
   display: flex;
   align-items: center;
-  column-gap: 5rem;
+  column-gap: 3rem;
 }
 
 .logo {
@@ -57,6 +73,7 @@ body {
   align-items: center;
 }
 
+/* score-board */
 .score-board {
   border: 2px solid var(--clr-1);
   position: relative;
@@ -98,7 +115,8 @@ body {
   font-size: 2rem;
 }
 
-.choices {
+/* choices */
+.choices-container {
   width: 20rem;
   height: 8rem;
   display: flex;
@@ -108,10 +126,12 @@ body {
 
 .choice {
   font-size: 5rem;
+  cursor: pointer
 }
 
-.action {
-  width: 20rem;
+/* Start and msg */
+.action-container {
+  width: 100%;
   height: 4rem;
   text-align: center;
   display: grid;
@@ -148,4 +168,76 @@ body {
 
 .hide-start {
   visibility: hidden;
+}
+
+/* strategy*/
+.strategy-control{
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 2rem;
+  position: relative;
+}
+
+.title {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toggle {
+  font-size: 1.5rem;
+  margin-right: -1.5rem;
+  background-color: transparent;
+  border: transparent;
+  cursor: pointer;
+}
+
+.toggle:hover{
+  animation: bounce 1000ms ease infinite;
+}
+
+.strategies-container {
+  width: max-content;
+  height: 4.25rem;
+  overflow-y: scroll;
+  transition: scale 150ms linear;
+  transform-origin: right;
+  scale: 0 1;
+  position: absolute;
+  top:-25px;
+  right: 25px;
+}
+
+.show-strategies {
+  scale: 1 1;
+}
+
+.strategy {
+  padding: 2px;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+#chose-strategy {
+  margin-left: 2rem;
+}
+
+
+/* animation */
+@keyframes bounce {
+  25% {
+    scale: 1.1;
+  }
+  50% {
+    scale: 1;
+  }
+  75%{
+    scale: 1.1;
+  }
+  100% {
+    scale: 1;
+  }
 }
