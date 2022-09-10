@@ -1,1 +1,1 @@
-# P_JS_Projects
+#Practice projects
