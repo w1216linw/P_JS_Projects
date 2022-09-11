@@ -26,17 +26,39 @@ const compStrategies = {
     return chose[Math.floor(Math.random() * 3)];
   },
   'unwinnable' : function(){
-    console.log('unwinnable');
+    switch(gameStatus.userMove.slice(-1)) {
+      case 'r':
+        return 'p';
+      case 'p':
+        return 's';
+      case 's':
+        return 'r';
+    }
+  },
+  'one step forward' : function() {
+    if(gameStatus.userMove.length <= 1) {
+      return compStrategies.random();
+    } else {
+      switch (gameStatus.userMove.slice(-2,-1)) {
+        case 's':
+          return 'r';
+        case 'r':
+          return 'p';
+        case 'p':
+          return 's';
+      }
+    }
   }
 }; // strategies
 
 const gameStatus = {
-  status : true,
   computerScore : 0,
   playerScore : 0,
+  strategy: '',
+  userMove: '',
 };
 
-choseStrategy.textContent = checkStrategy().textContent; 
+loadPage();
 
 /*
  Event Listener 
@@ -44,33 +66,40 @@ choseStrategy.textContent = checkStrategy().textContent;
 
 //game start button
 start.addEventListener('click', () => {
-    startGame();
+    defaultStatus();
     closeToggle();
     switchToggle();
 })
 
-//choose strategy button
-strategyToggle.addEventListener('click', () => {
-  strategyContainer.classList.toggle('show-strategies');
+//toggle strategies
+strategyToggle.addEventListener('click', () => strategyContainer.classList.toggle('show-strategies'));
 
-  strategies.forEach((strategy) => {
+//select strategy
+strategies.forEach((strategy) => {
 
-    strategy.addEventListener('click', () => {
-      document.querySelector('.strategy.active').classList.remove('active');
-      strategy.classList.add('active');
-      choseStrategy.textContent = checkStrategy().textContent;
-      closeToggle()
-    });
-
+  strategy.addEventListener('click', () => {
+    document.querySelector('.strategy.active').classList.remove('active');
+    strategy.classList.add('active');
+    choseStrategy.textContent = checkStrategy().textContent;
+    gameStatus.strategy = checkStrategy().textContent;
+    console.log(gameStatus.strategy) //delete
+    closeToggle()
   });
-  
+
+});
+
+//surrender Button
+surrenderBtn.addEventListener('click', () => {
+  result.textContent = "You surrendered?"
+  defaultStatus();
+  switchToggle();
 })
 
-//action listener
+//action choices listener
 choices.forEach((choice) => {
   choice.addEventListener('click', (e) => {
-    roundResult(e.currentTarget.id, checkStrategy().textContent.toLowerCase());
-    console.log(gameStatus.playerScore, gameStatus.computerScore);
+    gameStatus.userMove += e.currentTarget.id;
+    roundResult(e.currentTarget.id, gameStatus.strategy);
     matchResult();
   });
 });
@@ -79,41 +108,36 @@ choices.forEach((choice) => {
 Function 
 */
 
-//start game
-function startGame() {
-  defaultStatus();
-}
-
-
 //return round result
 function roundResult(playerAction, strategy) {
   const compAction = compStrategies[strategy]();
+  let msg = '';
+
   switch (playerAction + compAction) {
     case 'rs':
     case 'sp':
     case 'pr':
-      renderResult(playerAction, compAction, 'Player Wins');
+      msg = 'Player Wins';
       break;
     case 'rp':
     case 'ps':
     case 'sr':
-      renderResult(playerAction, compAction, 'Player Loses');
+      msg = 'Player Loses';
       break;
     case 'rr':
     case 'pp':
     case 'ss':
-      renderResult(playerAction, compAction, 'It\'s a Draw');
+      msg = 'It\'s a Draw';
       break;
   }
 
+  renderResult(playerAction, compAction, msg);
 }
 
 //return chose strategy
 function checkStrategy() {
   return document.querySelector('.strategy.active');
 }
-
-console.log(checkStrategy().textContent, choseStrategy.textContent);
 
 //render result
 function renderResult(playerAction,compAction,resultStr) {
@@ -156,6 +180,7 @@ function switchToggle() {
 
 //match result
 function matchResult() {
+
   if(gameStatus.playerScore === 3) {
     result.innerHTML = `You win the match!`;
     switchToggle();
@@ -163,13 +188,20 @@ function matchResult() {
     result.innerHTML = `You lose the match~`;
     switchToggle();
   }
+  
 }
 
 //default game status
 function defaultStatus() {
   gameStatus.computerScore = 0;
   gameStatus.playerScore = 0;
+  gameStatus.userMove= '';
   playerScore.textContent = 0;
   computerScore.textContent = 0;
 }
 
+//default strategy 
+function loadPage() {
+  choseStrategy.textContent = checkStrategy().textContent; 
+  gameStatus.strategy = checkStrategy().textContent;
+}

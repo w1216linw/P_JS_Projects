@@ -275,7 +275,7 @@ body {
 }
 
 .strategies-container {
-  width: max-content;
+  width: 10rem;
   height: 4.25rem;
   overflow-y: scroll;
   transition: scale 150ms linear;
@@ -291,12 +291,19 @@ body {
 }
 
 .strategy {
+  text-transform: capitalize;
   padding: 2px;
-  font-size: 1rem;
+  font-size: 1.125rem;
   line-height: 1.5rem;
+  cursor: pointer;
+}
+
+.strategy:hover {
+  background: var(--clr-3);
 }
 
 #chose-strategy {
+  text-transform: capitalize;
   margin-left: 2rem;
 }
 
