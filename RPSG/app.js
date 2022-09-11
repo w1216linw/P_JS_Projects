@@ -56,13 +56,14 @@ strategyToggle.addEventListener('click', () => {
   strategies.forEach((strategy) => {
 
     strategy.addEventListener('click', () => {
-      strategy.classList.remove('active');
+      document.querySelector('.strategy.active').classList.remove('active');
       strategy.classList.add('active');
       choseStrategy.textContent = checkStrategy().textContent;
       closeToggle()
     });
 
   });
+  
 })
 
 //action listener
@@ -111,6 +112,8 @@ function roundResult(playerAction, strategy) {
 function checkStrategy() {
   return document.querySelector('.strategy.active');
 }
+
+console.log(checkStrategy().textContent, choseStrategy.textContent);
 
 //render result
 function renderResult(playerAction,compAction,resultStr) {
