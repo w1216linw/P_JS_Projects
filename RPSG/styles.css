@@ -20,6 +20,7 @@
   --clr-4: #e9e9e9;
 
   --animation: bounce 1000ms ease-in-out infinite;
+  --rotate: rotate 250ms ease-in;
 }
 
 *,
@@ -124,15 +125,51 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  perspective: 500px;
+}
+
+.choice-cover {
+  width: 5rem;
+  height: 5rem;
+  position: relative;
 }
 
 .choice {
   font-size: 5rem;
-  cursor: pointer
+  cursor: pointer;
+  position: absolute;
+  rotate: y 180deg;
+  backface-visibility: hidden;
+  z-index: -1;
+  transition: var(--rotate);
+}
+
+.show-choice {
+  rotate: y 0deg;
+  z-index: 1;
 }
 
 .choice:hover {
   animation: var(--animation);
+}
+
+.cover {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  z-index: 1;
+  transition: var(--rotate);
+}
+
+.cover > img {
+  width: 100%;
+  height: 100%;
+}
+
+.hide-cover {
+  rotate: y 180deg;
+  z-index: -1;
 }
 
 /* Start and msg */
@@ -148,7 +185,7 @@ body {
 .action-msg {
   font-size: 2rem;
   scale: 0;
-  transition: scale 250ms ease-in 250ms;
+  transition: scale 250ms ease-in;
 }
 
 .show-msg {
@@ -164,7 +201,7 @@ body {
   position: absolute;
   visibility: visible;
   transition: 250ms ease-in;
-  transition-property: visibility, opacity;
+  transition-property: scale, opacity;
   cursor: pointer;
 }
 
@@ -173,7 +210,7 @@ body {
 }
 
 .hide-start {
-  visibility: hidden;
+  display: none;
 }
 
 /* strategy*/
@@ -193,16 +230,48 @@ body {
   align-items: center;
 }
 
-.toggle {
-  font-size: 1.5rem;
+.toggle-container {
+  width: 2rem;
+  height: 2rem;
   margin-right: -1.5rem;
+  position: relative;
+  perspective: 2rem;
+}
+
+.btn {
+  width: 2rem;
+  height: 2rem;
+  font-size: 1.5rem;
   background-color: transparent;
   border: transparent;
   cursor: pointer;
+  position: absolute;
+  transition: rotate 500ms ease;
+  backface-visibility: hidden;
 }
 
+.toggle {
+  z-index: 1;
+}
+
+.surrender:hover,
 .toggle:hover{
   animation: var(--animation);
+}
+
+.hide-toggle {
+  rotate:y 180deg;
+  z-index: -1;
+}
+
+.surrender {
+  rotate:y 180deg;
+  z-index: -1;
+}
+
+.show-surrender {
+  rotate:y 0deg;
+  z-index: 1;
 }
 
 .strategies-container {

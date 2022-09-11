@@ -32,9 +32,18 @@
         </div>
   
         <div class="choices-container">
-          <div class="choice" id="r"><i class="fa-regular fa-hand-back-fist"></i></div>
-          <div class="choice" id="p"><i class="fa-regular fa-hand"></i></div>
-          <div class="choice" id="s"><i class="fa-regular fa-hand-scissors"></i></div>
+          <div class="choice-cover">
+            <div class="choice" id="r"><i class="fa-regular fa-hand-back-fist"></i></div>
+            <div class="cover"><img src="./logo.png" alt="logo"></div>
+          </div>
+          <div class="choice-cover">
+            <div class="choice" id="p"><i class="fa-regular fa-hand"></i></div>
+            <div class="cover"><img src="./logo.png" alt="logo"></div>
+          </div>
+          <div class="choice-cover">
+            <div class="choice" id="s"><i class="fa-regular fa-hand-scissors"></i></div>
+            <div class="cover"><img src="./logo.png" alt="logo"></div>
+          </div>
         </div>
   
         <div class="action-container">
@@ -45,7 +54,10 @@
         <div class="strategy-control">
           <div class="title">
             <p>Strategy: <span id="chose-strategy"></span></p>
-            <button class="toggle"><i class="fa-solid fa-gamepad"></i></button>
+            <div class="toggle-container">
+              <button class="toggle btn"><i class="fa-solid fa-gamepad"></i></button>
+              <button class="surrender btn"><i class="fa-regular fa-flag"></i></button>
+            </div>
           </div>
           <div class="strategies-container">
               <div class="strategy active">Random</div>

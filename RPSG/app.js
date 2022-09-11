@@ -5,9 +5,11 @@ const result = document.querySelector('.result'); // result of each round
 
 const start = document.querySelector('.start'); //start button
 const choices = document.querySelectorAll('.choice'); //three choices (rock, paper, scissors)
+const covers = document.querySelectorAll('.cover'); // three covers
 const actionMsg = document.getElementById('action-msg'); //instruction
 
 const strategyToggle = document.querySelector('.toggle'); // toggle to show strategies
+const surrenderBtn = document.querySelector('.surrender');
 const strategyContainer = document.querySelector('.strategies-container'); //container
 const strategies = document.querySelectorAll('.strategy');  //strategies
 const choseStrategy = document.getElementById('chose-strategy'); //strategy being chose
@@ -40,48 +42,47 @@ choseStrategy.textContent = checkStrategy().textContent;
  Event Listener 
 */
 
+//game start button
+start.addEventListener('click', () => {
+    startGame();
+    closeToggle();
+    switchToggle();
+})
+
 //choose strategy button
 strategyToggle.addEventListener('click', () => {
   strategyContainer.classList.toggle('show-strategies');
 
   strategies.forEach((strategy) => {
-    strategy.classList.remove('active');
 
     strategy.addEventListener('click', () => {
+      strategy.classList.remove('active');
       strategy.classList.add('active');
       choseStrategy.textContent = checkStrategy().textContent;
-      strategyContainer.classList.remove('show-strategies');
+      closeToggle()
     });
 
   });
 })
 
-//game start button
-start.addEventListener('click', () => {
-
-  if(checkStrategy()){
-    start.classList.add('hide-start');
-    actionMsg.classList.add('show-msg');
-    startGame();
-  } else {
-    alert("Choose a strategy");
-  }
-
-})
+//action listener
+choices.forEach((choice) => {
+  choice.addEventListener('click', (e) => {
+    roundResult(e.currentTarget.id, checkStrategy().textContent.toLowerCase());
+    console.log(gameStatus.playerScore, gameStatus.computerScore);
+    matchResult();
+  });
+});
 
 /* 
 Function 
 */
+
+//start game
 function startGame() {
-
-    choices.forEach((choice) => {
-      choice.addEventListener('click', (e) => {
-        console.log(e.currentTarget);
-        roundResult(e.currentTarget.id, checkStrategy().textContent.toLowerCase());
-      });
-  });
-
+  defaultStatus();
 }
+
 
 //return round result
 function roundResult(playerAction, strategy) {
@@ -106,10 +107,9 @@ function roundResult(playerAction, strategy) {
 
 }
 
-//return there is a strategy
+//return chose strategy
 function checkStrategy() {
-  let strategy = document.querySelector('.strategy.active');
-  return strategy;
+  return document.querySelector('.strategy.active');
 }
 
 //render result
@@ -135,3 +135,38 @@ function calScore(resultStr) {
   };
 
 }
+
+//close toggle
+function closeToggle() {
+  strategyContainer.classList.remove('show-strategies');
+}
+
+//switch toggle and surrender, action msg and start button
+function switchToggle() {
+  start.classList.toggle('hide-start');
+  actionMsg.classList.toggle('show-msg');
+  strategyToggle.classList.toggle('hide-toggle');
+  surrenderBtn.classList.toggle('show-surrender');
+  choices.forEach(choice => choice.classList.toggle('show-choice'));
+  covers.forEach(cover => cover.classList.toggle('hide-cover'));
+}
+
+//match result
+function matchResult() {
+  if(gameStatus.playerScore === 3) {
+    result.innerHTML = `You win the match!`;
+    switchToggle();
+  } else if(gameStatus.computerScore === 3) {
+    result.innerHTML = `You lose the match~`;
+    switchToggle();
+  }
+}
+
+//default game status
+function defaultStatus() {
+  gameStatus.computerScore = 0;
+  gameStatus.playerScore = 0;
+  playerScore.textContent = 0;
+  computerScore.textContent = 0;
+}
+
