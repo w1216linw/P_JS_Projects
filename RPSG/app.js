@@ -82,7 +82,6 @@ strategies.forEach((strategy) => {
     strategy.classList.add('active');
     choseStrategy.textContent = checkStrategy().textContent;
     gameStatus.strategy = checkStrategy().textContent;
-    console.log(gameStatus.strategy) //delete
     closeToggle()
   });
 
